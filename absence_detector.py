@@ -1,9 +1,10 @@
 import json
 import pandas_gbq
 import pandas as pd 
-from google.oauth2 import service_account  
+from google.oauth2 import service_account
+from google.cloud import storage
 # Import the Generative AI library
-import google.generativeai as genai 
+import google.generativeai as genai
 api_key="XXXXXXXXXXX"
 
 # Path to your service account key file
@@ -23,9 +24,10 @@ for col in columns_to_process:
 print(df.dtypes)    
 
 SYSTEM_INSTRUCTION = """
-You are an expert in literary and linguistic analysis, specializing in identifying themes of absence, loss, and omission.
-Your task is to analyze the given text and determine whether it conveys the idea of ’missing’ or ’absence.’ Respond only
-with the requested JSON object and provide an explanatory justification.
+You are an expert in literary and linguistic analysis, specializing in identifying themes of miaaing , absence, loss, and omission.
+We gave people a task to tell us what is missing in a graph comparing to a baseline , and their response is the text you get.
+Your task is to analyze the given text and determine whether it conveys the idea of ’missing’ or ’absence’ , but also to analyze the context because maybe their response is describing literaly what is missing. 
+Respond only with the requested JSON object and provide an explanatory justification.
 
 Example JSON output:
 {{
